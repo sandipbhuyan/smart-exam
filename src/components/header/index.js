@@ -9,8 +9,13 @@ class Header extends Component {
 	render () {
 		return(
 			<header>
-         hello world
-      </header>
+				<section className='logo-container'>
+          Logo container
+        </section>
+				<section className='nav-bar'>
+          navigation ll be here
+        </section>
+			</header>
 		)
 	}
 
