@@ -1,0 +1,42 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import 'components/_404.sass';
+@import 'components/_pageState.scss';
+
+// Some best-practice CSS that's useful for most apps
+// Just remove them if they're not what you want
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.btn {
+  padding: 9px 15px;
+  color: red;
+  background: white;
+  border: 1px solid red;
+  font-weight: 500;
+}
+
+.btn-red {
+  color: white;
+  background: red;
+}
+
+.hide {
+  display: none;
+}
+/*Fonts*/
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,600,500,700");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
