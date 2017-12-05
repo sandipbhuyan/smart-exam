@@ -13,10 +13,10 @@ const store = createStore(window.__INITIAL_STATE__)
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const routes = require('./routes/index').default(store)
+	const routes = require('./routes/index').default(store)
 
-  ReactDOM.render(
-    <AppContainer store={store} routes={routes} />,
+	ReactDOM.render(
+		<AppContainer store={store} routes={routes} />,
     MOUNT_NODE
   )
 }
@@ -24,31 +24,31 @@ let render = () => {
 // Development Tools
 // ------------------------------------
 if (__DEV__) {
-  if (module.hot) {
-    const renderApp = render
-    const renderError = (error) => {
-      const RedBox = require('redbox-react').default
+	if (module.hot) {
+		const renderApp = render
+		const renderError = (error) => {
+			const RedBox = require('redbox-react').default
 
-      ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
-    }
+			ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
+		}
 
-    render = () => {
-      try {
-        renderApp()
-      } catch (error) {
-        console.error(error)
-        renderError(error)
-      }
-    }
+		render = () => {
+			try {
+				renderApp()
+			} catch (error) {
+				console.error(error)
+				renderError(error)
+			}
+		}
 
     // Setup hot module replacement
-    module.hot.accept('./routes/index', () =>
+		module.hot.accept('./routes/index', () =>
       setImmediate(() => {
-        ReactDOM.unmountComponentAtNode(MOUNT_NODE)
-        render()
-      })
+	ReactDOM.unmountComponentAtNode(MOUNT_NODE)
+	render()
+})
     )
-  }
+	}
 }
 
 // Let's Go!

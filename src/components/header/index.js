@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import logo from '../../images/logo.png'
 
 class Header extends Component {
 	constructor (props) {
@@ -10,8 +11,8 @@ class Header extends Component {
 		return(
 			<header>
 				<section className='logo-container'>
-          Logo container
-        </section>
+					<img src={logo} alt='' />
+				</section>
 				<section className='nav-bar'>
           navigation ll be here
         </section>

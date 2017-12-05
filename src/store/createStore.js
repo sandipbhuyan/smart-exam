@@ -3,29 +3,38 @@ import thunk from 'redux-thunk'
 import { browserHistory } from 'react-router'
 import makeRootReducer from '../reducers/index'
 import { updateLocation } from '../reducers/location'
+import { createLogger } from 'redux-logger'
+
+const logger = createLogger({
+  // ...options
+});
 
 const createStore = (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
+	const middleware = [thunk]
 
   // ======================================================
   // Store Enhancers
   // ======================================================
-  const enhancers = []
-  let composeEnhancers = compose
+	const enhancers = []
+	let composeEnhancers = compose
 
-  if (__DEV__) {
-    if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
-      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    }
-  }
+	if (__DEV__) {
+		if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
+			composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		}
+
+    //logger for dev
+
+		middleware.push(logger)
+	}
 
   // ======================================================
   // Store Instantiation and HMR Setup
   // ======================================================
-  const store = createReduxStore(
+	const store = createReduxStore(
     makeRootReducer(),
     initialState,
     composeEnhancers(
@@ -33,19 +42,19 @@ const createStore = (initialState = {}) => {
       ...enhancers
     )
   )
-  store.asyncReducers = {}
+	store.asyncReducers = {}
 
   // To unsubscribe, invoke `store.unsubscribeHistory()` anytime
-  store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
+	store.unsubscribeHistory = browserHistory.listen(updateLocation(store))
 
-  if (module.hot) {
-    module.hot.accept('../reducers/index', () => {
-      const reducers = require('../reducers/index').default
-      store.replaceReducer(reducers(store.asyncReducers))
-    })
-  }
+	if (module.hot) {
+		module.hot.accept('../reducers/index', () => {
+			const reducers = require('../reducers/index').default
+			store.replaceReducer(reducers(store.asyncReducers))
+		})
+	}
 
-  return store
+	return store
 }
 
 export default createStore
